@@ -18,8 +18,8 @@ class City(models.Model):
 
 class Person(models.Model):
     name = models.CharField(max_length=124)
-    country = models.ForeignKey(Country, on_delete=models.SET_NULL, blank=True, null=True)
-    city = models.ForeignKey(City, on_delete=models.SET_NULL, blank=True, null=True)
+    country = models.ManyToManyField(Country, blank=True, null=True)
+    city = models.ManyToManyField(City, blank=True, null=True)
 
     def __str__(self):
         return self.name

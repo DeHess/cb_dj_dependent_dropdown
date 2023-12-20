@@ -17,31 +17,26 @@
 </form>
 
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script>
-    $("#id_country").change(function () {
+    $('#id_country').on('click', 'option', function() {
+        
+        //if already in clicked list, unappend from clicked
+        //else, append to "clicked" list in localstorage
+
+        
+        //Work from local storage
+        const countryName = $(this).html();
         const url = $("#personForm").attr("data-cities-url");  // get the url of the `load_cities` view
-        const countryId = $(this).val();  // get the selected country ID from the HTML input
-
-        $.ajax({                       // initialize an AJAX request
-            url: url,                    // set the url of the request (= /persons/ajax/load-cities/ )
+        $.ajax({                      
+            url: url,                    
             data: {
-                'country_id': countryId       // add the country id to the GET parameters
+                'country_name': countryName       // add the country id to the GET parameters
             },
-            success: function (data) {   // `data` is the return of the `load_cities` view function
+            success: function (data) {  // `data` is the return of the `load_cities` view function
                 $("#id_city").html(data);  // replace the contents of the city input with the data that came from the server
-                /*
-
-                let html_data = '<option value="">---------</option>';
-                data.forEach(function (city) {
-                    html_data += `<option value="${city.id}">${city.name}</option>`
-                });
-                console.log(html_data);
-                $("#id_city").html(html_data);
-
-                */
             }
         });
-
     });
 </script>
 

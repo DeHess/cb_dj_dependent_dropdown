@@ -28,8 +28,11 @@ def person_update_view(request, pk):
 
 # AJAX
 def load_cities(request):
-    country_id = request.GET.get('country_id')
-    cities = City.objects.filter(country_id=country_id).all()
+    country_name = request.GET.get('country_name')
+    allcities = City.objects.all()
+    print("All Cities: " + str(allcities))
+    cities = City.objects.filter(country__name=country_name).all()
+    print("Cities: " + str(cities))
     return render(request, 'persons/city_dropdown_list_options.html', {'cities': cities})
     # return JsonResponse(list(cities.values('id', 'name')), safe=False)
 
